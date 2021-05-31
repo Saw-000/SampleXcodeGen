@@ -1,0 +1,49 @@
+
+# プロジェクト構成・設定
+name: SampleXcodeGen # project name
+config: # configuration の種類
+  Debug: debug
+  Release: release
+options: # プロジェクト構成やGeneralタブの設定
+  bundleIdPrefix: zousaaaaaan
+  groupSortPosition: top
+attributes: # メタ情報の定義
+  ORIGINIZATIONNAME: zousaaaaaan.SampleXcodeGen
+fileGroupe: # projectNavigatorでグルーピングする単位
+  - SampleXcodeGen
+  - SampleXcodeGenTests
+  - SampleXcodeGenUITests
+
+# ターゲット
+targets:
+  SampleXcodeGen:
+    type: application
+    platform: iOS
+    sources:
+      - path: SampleXcodeGen
+    configFiles:
+      Debug: SampleXcodeGen/Debug.xcconfig
+      Release: SampleXcodeGen/Release.xcconfig
+    settings:
+      base:
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_FILE: SampleXcodeGen/Info.plist
+      configs:
+        Debug:
+          GCC_OPTIMIZATION_LEVEL: 0
+        Release:
+          GCC_OPTIMIZATION_LEVEL: s
+  SampleXcodeGenTests:
+    type: bundle.unit-test
+    platform: iOS
+    dependencies:
+      - target: SampleXcodeGen
+    settings:
+      TEST_HOST: $(BUILT_PRODUCTS_DIR)/SampleXcodeGen.app/SampleXcodeGen
+      INFOPLIST_FILE: SampleXcodeGenTests/Info.plist
+      sources:
+        - SampleXcodeGenTests
+
+# スキーム
+schemes:
+  SampleXcodeGen:
